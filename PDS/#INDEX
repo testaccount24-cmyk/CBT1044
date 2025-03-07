@@ -1,0 +1,39 @@
+
+         'FCLARKE.CBTSCAN.EXEC' - Directory
+
+
+           Usage or
+ Member    Caller      Description
+ ========  =========   =====================================
+
+ $$$#DATE  data        Download stats
+
+ $COPEXEC  jcl         Copy members to target datasets
+
+ $INSTALL  text        Simple installation tips.
+
+ #INDEX    text        List of members in this dataset
+
+ @@README  text        Introductory message
+
+ @FIL1044  text        Inventory
+
+ CBTSCAN   data        ISPTLIB(CBTSCAN)
+
+ CBTXREF   exec        Display the CBTSCAN table
+
+ DFLTTLIB  fragment    How to set up a default ISPTLIB
+
+ DUP       exec        Allocate or copy-to a new dataset
+
+ FCCMDUPD  exec        Insert a new command onto TMPCMDS
+
+ KED       macro       Edit DDN(mbr); aliased as KBR and KVW
+
+ LA        exec        LISTA ST to a scrollable display
+
+ MEMLIST   exec        Member list with expanded selection
+
+ REALIAS   exec        Re-establish aliases from the Impact Analysis
+
+ TRAPOUT   exec        Trap trace output to DASD
