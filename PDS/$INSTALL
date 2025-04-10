@@ -1,0 +1,13 @@
+                    SIMPLE INSTALLATION STEPS
+
+1.  Use RUNDATA to create a new key 'CBTXREF' with tags HLQ and LIMIT.
+    HLQ is the high-level qualifier for dataset creation.  LIMIT is
+    the maximum number of datasets that may be concatenated.
+
+2.  Run job:  $COPEXEC
+
+3.  Execute the exec:  %CBTXREF
+
+
+  This note is from Sam Golob:   email:  sbgolob@cbttape.org
+

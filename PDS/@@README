@@ -1,0 +1,53 @@
+/*
+ This is the CBTXREF package.  CBTXREF is an ISPF dialog using table
+ CBTSCAN that provides a cross-reference showing which membernames are
+ present on which CBT file(s).  The primary routine is CBTXREF.  Several
+ subsidiary subroutines are included as well.  The calling sequence for any
+ of the routines in this package can be obtained by sending a question mark
+ as the first parameter:
+         ===> tso dup ?
+
+ Also included is ISPF table CBTSCAN.  This member should be moved to an
+ appropriate ISPTLIB dataset.  CBTSCAN details the entire CBT inventory
+ (with some small exceptions) whether or not those files are present on
+ a remote system.  The CBTSCAN table is maintained at the CBTTape site
+ and should be downloaded periodically to pick up any changes.
+
+ Routine KED is designed to have two aliases: KBR and KVW.  Once KED is
+ loaded to your SYSEXEC or SYSPROC, run REALIAS against it.  REALIAS will
+ establish the proper aliases.  If KED ever requires a change, rerun
+ REALIAS after the change.  Member $COPEXEC in this package uses IEBCOPY to
+ transfer KED --with its aliases-- obviating the need for an initial
+ REALIAS execution.
+
+ Both KED and CBTXREF will establish their own command table entries if
+ requested.  To request these routines to build new command table entries,
+ call them with INSTALL as a parameter:
+     ===> tso KED (( INSTALL
+              (generates KBR, KED, and KVW)
+     ===> tso CBTXREF (( INSTALL
+              (generates XREF )
+ FCCMDUPD, the routine that writes the command table entries, cannot write
+ directly to the DASD original of a table that is currently open, so
+ specify a non-open copy of the intended command table for the
+ newly-generated commands, and IEBCOPY that copy to the appropriate
+ destination.
+
+ CBTXREF v.2 uses RUNDATA to supply certain run-time parameters,
+ and DFLTTLIB to supply the name of ISPF table libraries.  Installers
+ should preload table RUNDATA with HLQ and LIMIT, as these datapoints
+ are expected to be supplied via RUNDATA.  Preload the RUNDATA table
+ with a short one-time REXX routine:
+
+       "NEWSTACK"
+       queue "TBLKEY CBTXREF"
+       queue "HLQ CBT"   /* high-level used by local CBT libraries */
+       queue "LIMIT 60"  /* Max # of libraries shown for a single query */
+       "RUNDATA WRITE "
+       "DELSTACK"
+
+ Obviously, it's not possible to operate on files that don't exist on your
+ site, so 'missing' files are automatically excluded from certain
+ processes.  If your site typically downloads a complete copy of the CBT
+ inventory, there won't be any missing files.
+*/
